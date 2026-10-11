@@ -1,0 +1,39 @@
+server:
+  port: ${PORT:8081}
+spring:
+  application:
+    name: leaddocket-integration
+  datasource:
+    url: ${DB_URL:jdbc:h2:file:./data/leaddocket;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE}
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:}
+  liquibase:
+    change-log: classpath:db/changelog/master.xml
+app:
+  admin:
+    username: ${APP_ADMIN_USERNAME:admin}
+    password: ${APP_ADMIN_PASSWORD:${random.uuid}}
+webhook:
+  max-body-bytes: 1048576
+  max-attempts: 5
+  poll-ms: 2000
+  worker-enabled: ${WEBHOOK_WORKER_ENABLED:true}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+
+leaddocket:
+  api-base-url: ${LD_API_BASE_URL:}
+  api-key: ${LD_API_KEY:}
+  api-auth-mode: ${LD_API_AUTH_MODE:UNCONFIGURED}
+  api-key-name: ${LD_API_KEY_NAME:api_key}
+  opportunity-url: ${LD_OPPORTUNITY_URL:}
+  webhook-key: ${LD_WEBHOOK_KEY:}
+  event-id-field: ${LD_EVENT_ID_FIELD:}
+  deduplication-mode: ${LD_DEDUPLICATION_MODE:PAYLOAD_HASH}
+  operations: {}

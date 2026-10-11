@@ -1,0 +1,117 @@
+{
+  "info": {
+    "name": "Lead Docket Integration",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{username}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{password}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8081"
+    },
+    {
+      "key": "username",
+      "value": "admin"
+    },
+    {
+      "key": "password",
+      "value": ""
+    },
+    {
+      "key": "eventId",
+      "value": ""
+    },
+    {
+      "key": "operation",
+      "value": ""
+    },
+    {
+      "key": "subscriptionId",
+      "value": ""
+    },
+    {
+      "key": "sender",
+      "value": ""
+    },
+    {
+      "key": "recipient",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "GET /api/webhooks/inbox",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/webhooks/inbox"
+      }
+    },
+    {
+      "name": "POST /api/webhooks/inbox/{{eventId}}/retry",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": "{{baseUrl}}/api/webhooks/inbox/{{eventId}}/retry"
+      }
+    },
+    {
+      "name": "POST /api/leaddocket/opportunities",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/leaddocket/opportunities",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"First\": \"Sample\",\n  \"Last\": \"Contact\",\n  \"Phone\": \"+15555550100\",\n  \"Email\": \"sample@example.com\",\n  \"Summary\": \"Integration example\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "POST /api/leaddocket/operations/{{operation}}",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/leaddocket/operations/{{operation}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"pathParameters\": {\n    \"id\": \"123\"\n  },\n  \"query\": {},\n  \"body\": null\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

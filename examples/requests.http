@@ -1,0 +1,42 @@
+@baseUrl = http://localhost:8081
+@username = admin
+@password = REPLACE_ME
+@eventId = REPLACE_ME
+@operation = REPLACE_ME
+@subscriptionId = REPLACE_ME
+@sender = REPLACE_ME
+@recipient = REPLACE_ME
+
+### GET /api/webhooks/inbox
+GET {{baseUrl}}/api/webhooks/inbox
+Authorization: Basic {{username}} {{password}}
+
+### POST /api/webhooks/inbox/{{eventId}}/retry
+POST {{baseUrl}}/api/webhooks/inbox/{{eventId}}/retry
+Authorization: Basic {{username}} {{password}}
+
+### POST /api/leaddocket/opportunities
+POST {{baseUrl}}/api/leaddocket/opportunities
+Authorization: Basic {{username}} {{password}}
+Content-Type: application/json
+
+{
+  "First": "Sample",
+  "Last": "Contact",
+  "Phone": "+15555550100",
+  "Email": "sample@example.com",
+  "Summary": "Integration example"
+}
+
+### POST /api/leaddocket/operations/{{operation}}
+POST {{baseUrl}}/api/leaddocket/operations/{{operation}}
+Authorization: Basic {{username}} {{password}}
+Content-Type: application/json
+
+{
+  "pathParameters": {
+    "id": "123"
+  },
+  "query": {},
+  "body": null
+}

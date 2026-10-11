@@ -1,0 +1,8 @@
+# TEMPLATE ONLY: replace with the path verified in your tenant's /api/ console.
+# Copy to config/application.yml and set SPRING_CONFIG_ADDITIONAL_LOCATION.
+leaddocket:
+  operations:
+    read-lead:
+      method: GET
+      path: /REPLACE_WITH_PATH_FROM_TENANT_CONSOLE/{id}
+      content-type: application/json

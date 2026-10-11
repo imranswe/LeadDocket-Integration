@@ -1,0 +1,22 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+ <changeSet id="1-inbox" author="example">
+  <createTable tableName="webhook_inbox">
+   <column name="event_id" type="varchar(200)"><constraints primaryKey="true" nullable="false"/></column>
+   <column name="payload" type="clob"><constraints nullable="false"/></column>
+   <column name="payload_hash" type="varchar(64)"><constraints nullable="false"/></column>
+   <column name="status" type="varchar(20)"><constraints nullable="false"/></column>
+   <column name="attempts" type="int"><constraints nullable="false"/></column>
+   <column name="received_at" type="timestamp"><constraints nullable="false"/></column>
+   <column name="next_attempt_at" type="timestamp"><constraints nullable="false"/></column>
+   <column name="processed_at" type="timestamp"/>
+   <column name="last_error" type="varchar(500)"/>
+  </createTable>
+  <createIndex tableName="webhook_inbox" indexName="ix_webhook_pending"><column name="status"/><column name="next_attempt_at"/></createIndex>
+  <createTable tableName="integration_event">
+   <column name="event_id" type="varchar(200)"><constraints primaryKey="true" nullable="false"/></column>
+   <column name="event_type" type="varchar(500)"/>
+   <column name="resource_id" type="varchar(200)"/>
+   <column name="handled_at" type="timestamp"/>
+  </createTable>
+ </changeSet>
+</databaseChangeLog>
